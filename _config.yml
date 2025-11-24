@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -105,3 +105,6 @@ deploy:
   type: git
   repo: https://github.com/jakechender/jakechender.github.io.git
   branch: main  # 必须是 main，如果是 master 会导致搞出两个分支
+# _config.yml 末尾添加
+image_link:
+  enable: true
