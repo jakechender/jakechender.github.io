@@ -1,0 +1,753 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Haoyu Chai">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="内容来自前辈的文章，链接已经放在文末。 一、前言-TEE OS都有哪些厂商伴随着Android的发展，TEEOS已成为端侧的基础安全平台，其提供的安全能力为指纹、人脸、支付等多个安全相关的业务服务，而如今都有哪些厂商在做TEE OS呢？  这里列出了18个TEEOS的厂商，在Android手机搭载的TEEOS中，高通的QSEE占比35%、Trustonic&amp;TEEgris占比20%、华为的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TEEOS浅谈">
+<meta property="og:url" content="https://jakechender.github.io/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/index.html">
+<meta property="og:site_name" content="HY-Chai的主页">
+<meta property="og:description" content="内容来自前辈的文章，链接已经放在文末。 一、前言-TEE OS都有哪些厂商伴随着Android的发展，TEEOS已成为端侧的基础安全平台，其提供的安全能力为指纹、人脸、支付等多个安全相关的业务服务，而如今都有哪些厂商在做TEE OS呢？  这里列出了18个TEEOS的厂商，在Android手机搭载的TEEOS中，高通的QSEE占比35%、Trustonic&amp;TEEgris占比20%、华为的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jakechender.github.io/img/bg1.WEBP">
+<meta property="article:published_time" content="2025-11-24T10:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-24T10:46:31.272Z">
+<meta property="article:author" content="Haoyu Chai">
+<meta property="article:tag" content="RISC-V">
+<meta property="article:tag" content="TEE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jakechender.github.io/img/bg1.WEBP">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>TEEOS浅谈 - HY-Chai的主页</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"jakechender.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":100,"cursorChar":"","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HY-Chai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg1.WEBP') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="TEEOS浅谈"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Haoyu Chai
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-24 18:00" pubdate>
+          2025年11月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">TEEOS浅谈</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>内容来自前辈的文章，链接已经放在文末。</p>
+<h2 id="一、前言-TEE-OS都有哪些厂商"><a href="#一、前言-TEE-OS都有哪些厂商" class="headerlink" title="一、前言-TEE OS都有哪些厂商"></a>一、前言-TEE OS都有哪些厂商</h2><p>伴随着Android的发展，TEEOS已成为端侧的基础安全平台，其提供的安全能力为指纹、人脸、支付等多个安全相关的业务服务，而如今都有哪些厂商在做TEE OS呢？</p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/356622171ae86bffa27bc8efa2e1de26.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">
+<p>这里列出了18个TEEOS的厂商，在Android手机搭载的TEEOS中，高通的QSEE占比35%、Trustonic&amp;TEEgris占比20%、华为的iTrustee占比17%。下面就基于各个手机厂商的选型来对比一下各个TEE OS解决方案。</p>
+<h3 id="1、小米"><a href="#1、小米" class="headerlink" title="1、小米"></a>1、小米</h3><p>小米搭载的是高通和MTK的芯片，其TEE OS能力非自研，高通采用的QSEE，MTK采用的是trustonic，但是各个TEE之间兼容性、开放性等等的问题，造成了安全应用的生态闭塞，制约了安全业务的发展。高通QSEE芯片整合能力强，并增加了SPU（Secure Processing Unit）处理器，实现了更高级别的安全，但是其开放性较差，只支持高通芯片，生态业务支持性不好。</p>
+<p>反观trustonic，其通过跨平台的SDK屏蔽设备差异，芯片差异，提供应用一致性的编程接口和工具，因此其生态应用拓展丰富，但落地困难，导致应用受限。</p>
+<h3 id="2、华为"><a href="#2、华为" class="headerlink" title="2、华为"></a>2、华为</h3><p>华为搭载的芯片包括hisi、高通、MTK，采用的iTrustee解决方案，其面向的是全场景，正在成为HMS（华为移动服务）安全生态竞争力基础。</p>
+<p>即使有多种规格的设备，通过可信业务接口适配层屏蔽了其差异，实现了接口的归一，从而各个安全业务可以无缝迁移到各个终端设备和平台，实现了跨平台、跨芯片部署，其开放性和兼容性满足了应用的全场景诉求。</p>
+<h3 id="3、三星"><a href="#3、三星" class="headerlink" title="3、三星"></a>3、三星</h3><p>三星TEEOS从初期的QSEE+Trustonic逐步走向自研化，当前部分芯片已经支持其自研的TEEgris，并对外发布SDK，其TEE OS分为自研和外购两种，同样制约了安全业务的发展，安全生态还处于初期阶段。</p>
+<h3 id="4、Google"><a href="#4、Google" class="headerlink" title="4、Google"></a>4、Google</h3><p>Google也推出了Android原生配套的TEE OS：Trusty，作为一种可靠且免费的开源替代方案提供给合作伙伴，用于替代其可信执行环境。但是Trusty不支持三方应用开发，其应用只能各个厂商封装在Trusty内核中，再加上Google没有自研的芯片支持，因此生态发展缓慢。</p>
+<h3 id="5、小结"><a href="#5、小结" class="headerlink" title="5、小结"></a>5、小结</h3><p>TEEOS目前有如此多的厂商在做，但是之间互不兼容，出于各自为政的状态，已经进入存量发展的阶段，其市场份额和手机占比正相关，碎片化及其严重。</p>
+<p>虽然有GP规范定义行业标准，但是规范滞后于行业的发展，且封闭繁琐不完整，从而手机厂商参与度不足，没有一家能够完全遵循GP，导致落地困难。再加上垂直的行业联盟，只聚焦于特定的技术方案，没有解决碎片化和易用性的问题，导致安全应用只能在部分高端芯片、高端手机上应用，无法做大安全生态。</p>
+<p>因此在全场景的大背景下，以保证安全为前提，只有解决了平台之间、芯片之间的兼容性问题和安全应用的生态开放问题，才能做到安全应用的全场景部署和无缝迁移，从而生态才能够健康的发展。而国家正在着手制定行业标准，《信息安全技术 可信执行环境系统架构》正在征求意见稿，《信息安全技术 可信执行环境服务规范》正在开始制定，可信执行环境国家系列标准有望从顶层设计规范未来技术发展。</p>
+<h2 id="二、为什么说GP没有解决TEEOS生态碎片化"><a href="#二、为什么说GP没有解决TEEOS生态碎片化" class="headerlink" title="二、为什么说GP没有解决TEEOS生态碎片化"></a>二、为什么说GP没有解决TEEOS生态碎片化</h2><p>通常意义上，大家都认为GP是TEE行业发展过程中一个重要的组织。</p>
+<p>如下图所示GP各种数据展示其经过20多年的发展，90多位会员企业，主要聚焦于SE、TEE、TPS三个方向。</p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/6277dc3fad217c6b5d6f65ae0dc74f5e.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">  
+<p>但GP实际一共只有85家会员单位。大部分都是传统卡商，SE芯片厂商，测试认证厂商等等。（<a target="_blank" rel="noopener" href="https://globalplatform.org/current-members/%EF%BC%89">https://globalplatform.org/current-members/）</a></p>
+<p>GP目标是：Develop once and deploy everywhere 一次开发，随意部署！</p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/3099e0e7023d31f219a8b3ddf8dea45c.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">  
+<p>但实际上，从2010年发布第一版API以来，碎片化反而有增无减。</p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/8b6745f05c119bad34638b562acbec40.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">  
+<p>GP不是以设备厂商角度来思考标准体系建设,不是以系统架构思想来构建标准体系。</p>
+<p>GP在智能卡领域是绝对的权威，这点不假，可是智能卡是一个强监管、封闭实体，与端侧不一样。硬件SE与Trustzone不一样，同样：TEEOS也与COS不同。TEEOS有着强烈的生态开放属性，其生态业务更有着更强算力资源需求。TEEOS与REE侧OS相互关联密切，有着更强的系统安全属性。而不仅仅是一个独立的SE芯片，不基于设备厂商生态思维，从而导致GP制定的一些标准基本从传统智能卡出发经验，不符合移动互联网时代应用生态业务需求和编程习惯。</p>
+<p>GP标准滞后于行业发展，比如对TUI接口的支持严重滞后，各TEEOS厂商自己实现私有接口。比如，对有生物识别等硬件接口支持严重滞后，导致各指纹厂商针对高通平台一套实现，麒麟一套实现，还要适配trustonic…豆荚…苦不堪言！</p>
+<p>GP直到2018年10月份才更新发布生物识别、外部接口等。而指纹相关应用在2016年已经对TEE有明确诉求，各家只能按照自己的方式去实现接口，何谈兼容！</p>
+<p>GP标准封闭繁琐，遵循智能卡体系， TA应用生命周期管理商业模式不明确，接口难用，应用困难。比如，安全应用管理混乱不堪，安全管理框架TMF，之前是叫TA admin,弄了好多年，最近总算与OTrP融合了一版。</p>
+<p>比如，各应用厂商都需要定义自己的DeviceID格式,因为GP只有UUID，没有设备的概念。</p>
+<p>GP沿用智能卡概念设计太多，不实用不够友好。比如简单的文件存储，干嘛非要persist object？直接文件不就完了？开发者开发TA最后还又要封装成 fs_open read write close…</p>
+<p>GP标准未能反映技术发展趋势，目前没有一家TEE厂商能严格遵守了GP规范，不是不愿意，而且业务需求根本不满足不了，因为卡片操作系统不需要人机交互界面，不需要生态业务。比如，没有定义TA编译配置环境规范，导致各家不兼容，一个指纹厂商要同时针对多家TEEOS开发不同版本的指纹安全应用。比如，没有定义端云一体规范，没有定义云端TEE框架,无法适应未来云端可信执行环境下的安全需求。</p>
+<p>GP标准落地约束性不足，安全厂商利益角逐，手机厂商参与度不足，落地困难。除了三星，苹果这些超级大公司之外，广大的手机厂商小米，OPPO，VIVO等手机厂商都没有参与。目前TEE主要部署在手机上，手机终端厂商有着很大的利益诉求，可GP的话语权体系目前并不在终端厂商。</p>
+<p>总之，由于GP规范自身问题甚至加重了各厂商存在大量私有API的情况，虽然说后来GP也推出TPS的目的是想统一端云标准，但是其标准本身的碎片化并没有很好解决，而是头痛医头脚痛医脚。</p>
+<p>因此GP无法解决生态能力开放体系化，标准化问题。</p>
+<p>（这倒是打开了我的新的认知）</p>
+<h2 id="三、TEE成为央行支付产品种类"><a href="#三、TEE成为央行支付产品种类" class="headerlink" title="三、TEE成为央行支付产品种类"></a>三、TEE成为央行支付产品种类</h2><p>央行发布的《条码支付业务规范（试行）》的通知，包括三个文件：</p>
+<p>《条码支付业务规范（试行）》</p>
+<p>《条码支付安全技术规范（试行）》</p>
+<p>《条码支付受理终端技术规范（试行）》</p>
+<p>解读的文章众多，今天这里从技术方面进行学习：</p>
+<p>首先我们来看看， 中国人民银行就发布条码支付规范答记者问中有如下</p>
+<p>问：针对条码支付技术风险，提出了哪些针对性要求？</p>
+<p>答：一是加强条码安全防护。采取支付标记化（Tokenization）、有效期控制、条码防伪识别等手段，提升条码生成、存储、展示、识读、解析、使用等环节的安全防护能力，有效保障条码的可靠性和有效性。</p>
+<p>二是提升条码支付交易安全强度。针对不同条码生成方式，提出加密生成、定期更新、终端唯一标识绑定等具有针对性的安全防护措施。要求银行、支付机构和清算机构运用交易验证强度与交易额度相匹配的技术措施提高条码支付交易的安全性。</p>
+<p>三是强化条码支付交易风险监测与预警。合理应用大数据分析、用户行为建模等手段建立条码支付风险监控模型和系统，对异常交易及时预警并附加风控措施，对高风险交易及时告知客户资金变化情况。</p>
+<p>四是加强客户端软件安全管理。从木马病毒防范、信息加密保护、运行环境可信等方面提升条码支付客户端软件的安全防护能力，要求客户端软件能够监测并向后台系统反馈手机支付环境安全状况并作为风控策略的依据。</p>
+<p>这里面明确了提示条码生成、存储、展示、识读、解析等环节的安全防护能力，以及客户端软件的可信环境安全防护能力。</p>
+<p>我们知道TEE+SE的基础能力天然具备上述要求，比如应用条码的生成、存储可以在TEE环境中，展示、识读可以在TUI页面完成。</p>
+<p>我们理解的客户端软件的可信环境安全防护能力指的是TEE或者SE，目前Android手机上如果不基于TEE技术是无法“可信”！</p>
+<p>再来看看《条码支付受理终端技术规范（试行）》：  </p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/dc2174cd8323fa49b1e3b4e53ea3fb61.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">
+
+<p>也就是说后期的终端设备是强制要求使用TEE或者SE的，我们不难看出</p>
+<img src="/2025/11/24/TEEOS%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD_local/2a21f1a1938f5cad9399d3c294def79a.png" srcset="/img/loading.gif" lazyload class="" title="在这里插入图片描述">
+
+<p>各位同仁看到这里，大家是否明白了什么呢？</p>
+<p>1，央行出台了条码支付规范，要求2018年4月1日起实施。</p>
+<p>2，中国支付清算协会明出台了支付产品种类，同时明确了引用的标准。2018年1月1日起实施。</p>
+<p>3，中国支付清算协会业务主管单位为中国人民银行。</p>
+<p>安全已经提示到国家战略层门，央行已经在支付产品安全的具体落实方面，包括在安全技术、产品规范、技术标准等方面对TEE、SE等可信执行环境做出了明确的指示。</p>
+<p>参考链接：<br><a target="_blank" rel="noopener" href="https://developer.huawei.com/consumer/cn/forum/topic/0201884414394540189?fid=0102501639476130680">https://developer.huawei.com/consumer/cn/forum/topic/0201884414394540189?fid=0102501639476130680</a><br><a target="_blank" rel="noopener" href="https://developer.huawei.com/consumer/cn/forum/topic/0202506006826340101?fid=0102501639476130680">https://developer.huawei.com/consumer/cn/forum/topic/0202506006826340101?fid=0102501639476130680</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A0%94%E7%A9%B6/" class="category-chain-item">技术研究</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/TEE/" class="print-no-link">#TEE</a>
+      
+        <a href="/tags/RISC-V/" class="print-no-link">#RISC-V</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>TEEOS浅谈</div>
+      <div>https://jakechender.github.io/2025/11/24/TEEOS的一点闲言碎语_local/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Haoyu Chai</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/11/25/2%E3%80%81TA%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="TA快速入门">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TA快速入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div>Copyright © 2025 HY-Chai</div> <div style="font-size: 0.85rem"> <span>Powered by </span> <a href="https://hexo.io" target="_blank" rel="nofollow noopener">Hexo</a> <span> & </span> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">Fluid</a> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/slogan-loop.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
